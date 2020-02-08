@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Text Distortion</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdn.rawgit.com/bradley/Blotter/master/build/blotter.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Blotter/0.1.0/materials/rollingDistortMaterial.min.js"></script>
+    </head>
+    <body>
+        <div id="text"></div>
+        <script>
+            let Size = 0.001;
+
+            function increaseSize() {
+                var elem = document.getElementById("text");
+                var text = new Blotter.Text("OFFBEAT", {
+                    family: "Monument Extended",
+                    weight: 100,
+                    size: 180,
+                    fill: "red"
+                });
+
+                var material = new Blotter.RollingDistortMaterial();
+
+                material.uniforms.uSineDistortAmplitude.value = 0.04;
+
+                var blotter = new Blotter(material, {
+                    texts: text
+                });
+
+                var scope = blotter.forText(text);
+
+                scope.appendTo(elem);
+
+                Size += 0.001;
+            }
+
+            increaseSize();
+        </script>
+    </body>
+</html>
